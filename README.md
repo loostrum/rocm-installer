@@ -1,2 +1,2 @@
-# hip-installer
-Github Action to install HIP
+# rocm-installer
+Github Action to install ROCm
