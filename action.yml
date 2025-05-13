@@ -9,7 +9,7 @@ inputs:
   usecase:
     description: "Forwarded to the --usecase option of amdgpu-install."
     required: false
-    default: "hiplibsdk"
+    default: "hip"
 runs:
   using: "Composite"
   steps:
