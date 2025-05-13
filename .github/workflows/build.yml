@@ -14,24 +14,13 @@ jobs:
           which hipcc
 
   install-custom:
-    name: Run ROCm installer with custom usecase
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./
-        with:
-          usecase: openmpsdk
-      - run: |
-          ls /opt/rocm/
-
-  install-specific-version:
-    name: Run ROCm installer with specific ROCm version
+    name: Run ROCm installer with custom options
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: ./
         with:
           usecase: openmpsdk
-          version: "6.3.0"
+          version: 6.3.0
       - run: |
-          which hipcc
+          ls /opt/rocm/
