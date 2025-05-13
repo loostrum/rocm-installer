@@ -16,7 +16,7 @@ runs:
     - name: "Install AMDGPU installer"
       shell: bash
       run: |
-        filename=$(./download_amdgpu_installer ${{ inputs.version }})
+        filename=$(./download_amdgpu_installer.sh ${{ inputs.version }})
         sudo apt install ./${filename}
         sudo apt update
     - name: "Install ROCm"
