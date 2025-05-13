@@ -10,11 +10,14 @@ runs:
   using: "Composite"
   steps:
     - name: "Install AMDGPU installer"
+      shell: bash
       run: |
         wget https://repo.radeon.com/amdgpu-install/6.4/ubuntu/jammy/amdgpu-install_6.4.60400-1_all.deb
         sudo apt install ./amdgpu-install_6.4.60400-1_all.deb
         sudo apt update
     - name: "Install ROCm"
+      shell: bash
       run: sudo amdgpu-install --rocmrelease=${{ inputs.version }}  --usecase=rocmdev,hiplibsdk --no-dkms -y
     - name: "Add ROCm to PATH"
+      shell: bash
       run: "echo /opt/rocm/bin >> $GITHUB_PATH"
