@@ -24,7 +24,7 @@ jobs:
       - run: |
           which hipcc
 
-  install-specific-version
+  install-specific-version:
     name: Run ROCm installer with specific ROCm version
     runs-on: ubuntu-latest
     steps:
