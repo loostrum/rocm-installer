@@ -5,7 +5,7 @@ inputs:
   version:
     description: "ROCm version to install. Set to either major.minor.patch (e.g. 6.4.0), or 'latest'"
     required: false
-    default: "6.4.0"
+    default: "latest"
   usecase:
     description: "Forwarded to the --usecase option of amdgpu-install."
     required: false
