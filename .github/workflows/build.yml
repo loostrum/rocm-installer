@@ -22,7 +22,7 @@ jobs:
         with:
           usecase: openmpsdk
       - run: |
-          which hipcc
+          ls /opt/rocm/
 
   install-specific-version:
     name: Run ROCm installer with specific ROCm version
