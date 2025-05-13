@@ -3,19 +3,22 @@ description: "Install ROCm"
 author: "Leon Oostrum"
 inputs:
   version:
-    description: "ROCm version to install"
+    description: "ROCm version to install. Set to either major.minor.patch (e.g. 6.4.0), or 'latest'"
     required: false
     default: "6.4.0"
+  usecase:
+    description: "Forwarded to the --usecase option of amdgpu-install."
+    required: false
+    default: "rocmdev,hiplibsdk"
 runs:
   using: "Composite"
   steps:
     - name: "Install AMDGPU installer"
       shell: bash
       run: |
-        source /etc/os-release
-        wget https://repo.radeon.com/amdgpu-install/6.4/ubuntu/${VERSION_CODENAME}/amdgpu-install_6.4.60400-1_all.deb
-        sudo apt install ./amdgpu-install_6.4.60400-1_all.deb
+        filename=$(./download_amdgpu_installer ${{ inputs.version }})
+        sudo apt install ./${filename}
         sudo apt update
     - name: "Install ROCm"
       shell: bash
-      run: sudo amdgpu-install --rocmrelease=${{ inputs.version }}  --usecase=rocmdev,hiplibsdk --no-dkms -y
+      run: sudo amdgpu-install --usecase=${{ inputs.usecase }} --no-dkms -y
