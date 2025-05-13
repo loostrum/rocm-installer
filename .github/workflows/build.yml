@@ -26,7 +26,7 @@ jobs:
 
   install-specific-version:
     name: Run ROCm installer with specific ROCm version
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: ./
