@@ -26,11 +26,11 @@ jobs:
 
   install-specific-version:
     name: Run ROCm installer with specific ROCm version
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: ./
         with:
-          version: "6.0.3"
+          version: "6.3.0"
       - run: |
           which hipcc
