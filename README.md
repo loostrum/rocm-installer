@@ -20,7 +20,7 @@ jobs:
 
 ## Options:
 - `version`: Specifies the toolkit version to install. Specificy as `major.minor.patch`, or 'latest'. By default install the latest version.
-- `usecase`: Determines which packages are installed, forwarded to the `amdgpu-install` script. Multiple usecases must be separated by commas. By default set to hip. Available usecases:
+- `usecase`: Determines which packages are installed, forwarded to the `amdgpu-install` script. Multiple usecases must be separated by commas. By default set to hiplibsdk. Available usecases:
     - dkms            (to only install the kernel mode driver)
     - graphics        (for users of graphics applications)
     - multimedia      (for users of open source multimedia)
