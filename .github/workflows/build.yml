@@ -1,3 +1,5 @@
+name: Run ROCm installer
+
 on:
   workflow_dispatch:
 
