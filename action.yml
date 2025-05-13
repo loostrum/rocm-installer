@@ -13,10 +13,13 @@ inputs:
 runs:
   using: "Composite"
   steps:
+    - name: "Set PATH"
+      shell: bash
+      run: echo "${{ github.action_path }}" >> $GITHUB_PATH
     - name: "Install AMDGPU installer"
       shell: bash
       run: |
-        filename=$(./download_amdgpu_installer.sh ${{ inputs.version }})
+        filename=$(download_amdgpu_installer.sh ${{ inputs.version }})
         sudo apt install ./${filename}
         sudo apt update
     - name: "Install ROCm"
