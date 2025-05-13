@@ -39,7 +39,7 @@ fi
 ubuntu_codename=$(get_ubuntu_codename)
 
 # Url does not contain the patch release number when it's zero, e.g. 6.4.0 becomes 6.4, so strip any trailing zero patch number
-regex="(\d+\.\d+)\.0"
+regex="([0-9]+\.[0-9]+)\.0"
 if [[ ${version} =~ ${regex} ]]; then
     version=${BASH_REMATCH[1]}
 fi
