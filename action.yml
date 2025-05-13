@@ -22,3 +22,6 @@ runs:
     - name: "Install ROCm"
       shell: bash
       run: sudo amdgpu-install --usecase=${{ inputs.usecase }} --no-dkms -y
+branding:
+  icon: arrow-down-circle
+  color: green
