@@ -15,4 +15,5 @@ jobs:
           ls -lhat /opt/
           ls -lhat /opt/rocm/
           df -h
-    
+          lsb_release -c | sort
+          cat /etc/os-release
