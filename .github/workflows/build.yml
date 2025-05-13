@@ -12,4 +12,5 @@ jobs:
           which hipcc
           ls -lhat /opt/
           ls -lhat /opt/rocm/
+          df -h
     
