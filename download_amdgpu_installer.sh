@@ -16,9 +16,6 @@ is_ubuntu() {
 }
 
 get_ubuntu_codename() {
-    if ! [[ is_ubuntu ]]; then
-        return
-    fi
     . /etc/os-release
     echo ${VERSION_CODENAME}
 }
@@ -27,6 +24,11 @@ get_http_status() {
     url="$1"
     echo $(curl -s -L -I ${url} | grep ^HTTP | tail -n 1 | cut -d$' ' -f2)
 }
+
+is_ubuntu
+if [[ $? -ne 0 ]]; then
+    exit 1
+fi
 
 version="$1"
 if [[ -z "${version}" ]]; then
@@ -37,7 +39,7 @@ fi
 ubuntu_codename=$(get_ubuntu_codename)
 
 # Url does not contain the patch release number when it's zero, e.g. 6.4.0 becomes 6.4, so strip any trailing zero patch number
-regex="(.*)\.0"
+regex="(\d+\.\d+)\.0"
 if [[ ${version} =~ ${regex} ]]; then
     version=${BASH_REMATCH[1]}
 fi
