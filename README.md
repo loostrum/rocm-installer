@@ -20,18 +20,18 @@ jobs:
 
 ## Options:
 - `version`: Specifies the toolkit version to install. Specificy as `major.minor.patch`, or 'latest'. By default install the latest version.
-- `usecase`: Determines which packages are installed, forwarded to the `amdgpu-install` script. Multiple usecases must be separated by commas. By default installs ROCm and HIP. Available usecases:
+- `usecase`: Determines which packages are installed, forwarded to the `amdgpu-install` script. Multiple usecases must be separated by commas. By default set to hiplibsdk. Available usecases:
     - dkms            (to only install the kernel mode driver)
     - graphics        (for users of graphics applications)
     - multimedia      (for users of open source multimedia)
     - workstation     (for users of legacy WS applications)
     - rocm            (for users and developers requiring full ROCm stack)
     - wsl             (for using ROCm in a WSL context)
-    - rocmdev         (for developers requiring ROCm runtime and
+    - rocmdev         (for developers requiring ROCm runtime and profiling/debugging tools)
     - rocmdevtools    (for developers requiring ROCm profiling/debugging tools)
     - amf             (for users of AMF based multimedia)
     - lrt             (for users of applications requiring ROCm runtime)
-    - opencl          (for users of applications requiring OpenCL on Vega or later
+    - opencl          (for users of applications requiring OpenCL on Vega or later products)
     - openclsdk       (for application developers requiring ROCr based OpenCL)
     - hip             (for users of HIP runtime on AMD products)
     - hiplibsdk       (for application developers requiring HIP on AMD products)
