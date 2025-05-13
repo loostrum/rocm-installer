@@ -1,5 +1,6 @@
 #!/bin/bash
 is_ubuntu() {
+    return 0
     if ! [[ -f /etc/os-release ]]; then
         >&2 echo "Unsupported OS"
         return 1
@@ -16,6 +17,8 @@ is_ubuntu() {
 }
 
 get_ubuntu_codename() {
+    echo noble
+    return
     . /etc/os-release
     echo ${VERSION_CODENAME}
 }
@@ -39,10 +42,12 @@ fi
 ubuntu_codename=$(get_ubuntu_codename)
 
 # Url does not contain the patch release number when it's zero, e.g. 6.4.0 becomes 6.4, so strip any trailing zero patch number
-regex="(\d+\.\d+)\.0"
+regex="([0-9]+\.[0-9]+)\.0"
 if [[ ${version} =~ ${regex} ]]; then
     version=${BASH_REMATCH[1]}
 fi
+echo ${version}
+exit
 
 # Check if provided version is valid
 url="https://repo.radeon.com/amdgpu-install/${version}"
