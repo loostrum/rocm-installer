@@ -14,8 +14,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: loostrum/rocm-installer@v0.1
-      - run:
-          hipcc main.cpp -o main
+      - run: hipcc main.cpp -o main
+```
+
+In case you want to test e.g. multiple ROCm versions and GPU architectures, you can do so with the matrix option of Github Actions. The following would run with ROCm 6.3.0 and the latest version, and both gfx1100 (RDNA3) and gfx942 (CDNA3), for a total of four tests.
+```yaml
+jobs:
+  test-rocm:
+    name: My Job Name
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rocm_version: ["6.3.0", "latest"]
+        gpu_arch: ["gfx1100", "gfx942"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: loostrum/rocm-installer@v0.1
+        with:
+          version: ${{ matrix.rocm_version }}
+      # CMake
+      - run: |
+          cmake -S . -B build -DCMAKE_HIP_ARCHITECTURES=${{ matrix.gpu_arch }}
+      # Manual
+      - run: |
+          hipcc --offload-arch=${{ matrix.gpu_arch }} main.cpp -o main
 ```
 
 ## Options:
@@ -71,6 +93,5 @@ jobs:
         with:
           packages: hipcc
           version: 6.3.0
-      - run:
-          hipcc main.cpp -o main
+      - run: hipcc main.cpp -o main
 ```
