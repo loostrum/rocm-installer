@@ -7,6 +7,11 @@ Github Action to install HIP/ROCm on Ubuntu runners.
 
 Add a `uses` statement to the job where you want to install HIP/ROCm, e.g.:
 ```yaml
+name: CI
+
+on:
+  push:
+
 jobs:
   test-rocm:
     name: My Job Name
@@ -19,6 +24,11 @@ jobs:
 
 In case you want to test e.g. multiple ROCm versions and GPU architectures, you can do so with the matrix option of Github Actions. The following would run with ROCm 6.3.0 and the latest version, and both gfx1100 (RDNA3) and gfx942 (CDNA3), for a total of four tests.
 ```yaml
+name: CI
+
+on:
+  push:
+
 jobs:
   test-rocm:
     name: My Job Name
@@ -35,15 +45,16 @@ jobs:
       # CMake
       - run: |
           cmake -S . -B build -DCMAKE_HIP_ARCHITECTURES=${{ matrix.gpu_arch }}
+          make -C build
       # Manual
       - run: |
           hipcc --offload-arch=${{ matrix.gpu_arch }} main.cpp -o main
 ```
 
 ## Options:
-- `version`: Specifies the toolkit version to install. Specificy as `major.minor.patch`, or 'latest'. By default install the latest version.
-- `packages`: Space-separated list of packages to intall. When using this option, the amdgpu-install script is bypassed and the usecase input option is ignored.
-- `usecase`: Determines which packages are installed, forwarded to the `amdgpu-install` script. Multiple usecases must be separated by commas. By default set to hiplibsdk. Available usecases:
+- `version`: Specifies the toolkit version to install. Specify as `major.minor.patch`, or 'latest'. By default the latest version is installed.
+- `packages`: Space-separated list of packages to install. By default a minimal set to compile with hipcc for AMD GPUs: hipcc hip-dev rocm-device-libs.
+- `usecase`: Determines which packages are installed, forwarded to the `amdgpu-install` script. Multiple usecases must be separated by commas. Note: most of the usecases install a lot of packages, it is very likely that a default Github runner does not have enough disk space. The `packages` option is preferred for this reason. Available usecases:
     - dkms            (to only install the kernel mode driver)
     - graphics        (for users of graphics applications)
     - multimedia      (for users of open source multimedia)
@@ -65,8 +76,33 @@ jobs:
 
 Examples:
 
+Custom package list:
+```yaml
+name: CI
+
+on:
+  push:
+
+jobs:
+  test-rocm:
+    name: My Job Name
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: loostrum/rocm-installer@v0.1
+        with:
+          packages: hipcc hip-dev rocm-device-libs rocm-hip-runtime-dev rocrand rocfft 
+          version: 6.3.0
+      - run: hipcc main.cpp -o main
+```
+
 Custom usecase:
 ```yaml
+name: CI
+
+on:
+  push:
+
 jobs:
   test-rocm:
     name: My Job Name
@@ -79,19 +115,4 @@ jobs:
           version: 6.3.0
       - run:
           hipcc main.cpp -o main
-```
-
-Custom package list:
-```yaml
-jobs:
-  test-rocm:
-    name: My Job Name
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: loostrum/rocm-installer@v0.1
-        with:
-          packages: hipcc
-          version: 6.3.0
-      - run: hipcc main.cpp -o main
 ```
