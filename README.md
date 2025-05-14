@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: loostrum/rocm-installer@v0.1
+      - uses: loostrum/rocm-installer@v0.2
       - run: hipcc main.cpp -o main
 ```
 
@@ -39,7 +39,7 @@ jobs:
         gpu_arch: ["gfx1100", "gfx942"]
     steps:
       - uses: actions/checkout@v4
-      - uses: loostrum/rocm-installer@v0.1
+      - uses: loostrum/rocm-installer@v0.2
         with:
           version: ${{ matrix.rocm_version }}
       # CMake
@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: loostrum/rocm-installer@v0.1
+      - uses: loostrum/rocm-installer@v0.2
         with:
           packages: hipcc hip-dev rocm-device-libs rocm-hip-runtime-dev rocrand rocfft 
           version: 6.3.0
@@ -109,7 +109,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: loostrum/rocm-installer@v0.1
+      - uses: loostrum/rocm-installer@v0.2
         with:
           usecase: rocmdev
           version: 6.3.0
