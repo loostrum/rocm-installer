@@ -28,7 +28,7 @@ jobs:
         with:
           packages: hipcc
           version: 6.3.0
-      - run: which hipcc
+      - run: ls /opt/rocm/bin/hipcc
 
   install-usecase:
     name: Run ROCm installer with custom usecase
