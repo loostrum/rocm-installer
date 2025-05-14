@@ -20,6 +20,7 @@ jobs:
 
 ## Options:
 - `version`: Specifies the toolkit version to install. Specificy as `major.minor.patch`, or 'latest'. By default install the latest version.
+- `packages`: Space-separated list of packages to intall. When using this option, the amdgpu-install script is bypassed and the usecase input option is ignored.
 - `usecase`: Determines which packages are installed, forwarded to the `amdgpu-install` script. Multiple usecases must be separated by commas. By default set to hiplibsdk. Available usecases:
     - dkms            (to only install the kernel mode driver)
     - graphics        (for users of graphics applications)
@@ -40,7 +41,9 @@ jobs:
     - mlsdk           (for developers executing machine learning workloads)
     - asan            (for users of ASAN enabled ROCm packages)
 
-Example:
+Examples:
+
+Custom usecase:
 ```yaml
 jobs:
   test-rocm:
@@ -51,6 +54,22 @@ jobs:
       - uses: loostrum/rocm-installer@v0.1
         with:
           usecase: rocmdev
+          version: 6.3.0
+      - run:
+          hipcc main.cpp -o main
+```
+
+Custom package list:
+```yaml
+jobs:
+  test-rocm:
+    name: My Job Name
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: loostrum/rocm-installer@v0.1
+        with:
+          packages: hipcc
           version: 6.3.0
       - run:
           hipcc main.cpp -o main
