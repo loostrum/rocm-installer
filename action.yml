@@ -9,10 +9,10 @@ inputs:
   usecase:
     description: "Forwarded to the --usecase option of amdgpu-install."
     required: false
-    default: "hiplibsdk"
   packages:
-    description: "Space-separated list of packages to intall. When using this option, the amdgpu-install script is bypassed and the usecase input option is ignored."
+    description: "Space-separated list of packages to intall."
     required: false
+    default: "hipcc hip-dev rocm-device-libs"
 runs:
   using: "Composite"
   steps:
@@ -27,7 +27,7 @@ runs:
         sudo apt install -y ./${filename}
         sudo apt update
     - name: "Install ROCm through amdgpu-install"
-      if: "${{ inputs.packages == '' }}"
+      if: "${{ inputs.usecase != '' }}"
       shell: bash
       run: sudo amdgpu-install --usecase=${{ inputs.usecase }} --no-dkms -y
     - name: "Install ROCm packages"
