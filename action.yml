@@ -34,6 +34,9 @@ runs:
       if: "${{ inputs.packages != '' }}"
       shell: bash
       run: sudo apt install -y ${{ inputs.packages }}
+    - name: "Ensure /opt/rocm/bin is in PATH"
+      shell: bash
+      run: echo /opt/rocm/bin >> $GITHUB_PATH
 branding:
   icon: arrow-down-circle
   color: green
