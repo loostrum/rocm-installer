@@ -53,7 +53,7 @@ jobs:
 
 ## Options:
 - `version`: Specifies the toolkit version to install. Specify as `major.minor.patch`, or 'latest'. By default the latest version is installed.
-- `packages`: Space-separated list of packages to install. By default a minimal set to compile with hipcc for AMD GPUs: hipcc hip-dev rocm-device-libs.
+- `packages`: Space-separated list of packages to install. By default 'rocm-hip-runtime-dev', i.e. a minimal set to compile with hipcc for AMD GPUs.
 - `usecase`: Determines which packages are installed, forwarded to the `amdgpu-install` script. Multiple usecases must be separated by commas. Note: most of the usecases install a lot of packages, it is very likely that a default Github runner does not have enough disk space. The `packages` option is preferred for this reason. Available usecases:
     - dkms            (to only install the kernel mode driver)
     - graphics        (for users of graphics applications)
@@ -91,7 +91,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: loostrum/rocm-installer@v0.2
         with:
-          packages: hipcc hip-dev rocm-device-libs rocm-hip-runtime-dev rocrand rocfft 
+          packages: rocm-hip-runtime-dev rocrand rocfft 
           version: 6.3.0
       - run: hipcc main.cpp -o main
 ```
