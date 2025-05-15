@@ -12,7 +12,7 @@ inputs:
   packages:
     description: "Space-separated list of packages to intall."
     required: false
-    default: "hipcc hip-dev rocm-device-libs"
+    default: "rocm-hip-runtime-dev"
 runs:
   using: "Composite"
   steps:
