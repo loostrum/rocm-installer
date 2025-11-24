@@ -14,7 +14,7 @@ jobs:
     name: Run ROCm installer
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ./
       - run: |
           which hipcc
@@ -23,7 +23,7 @@ jobs:
     name: Run ROCm installer with custom package list
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ./
         with:
           packages: hipcc
@@ -34,7 +34,7 @@ jobs:
     name: Run ROCm installer with custom usecase
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ./
         with:
           usecase: openmpsdk
